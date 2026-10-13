@@ -1,0 +1,56 @@
+/*  NAVBAR  */                                 /* Sezione navbar. */
+.navbar {                                      /* Selettore navbar. */
+    width: 100%;                               /* Larghezza piena. */
+    background: #ffffff;                       /* Sfondo bianco. */
+    padding: 15px 30px;                        /* Spazio interno. */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);    /* Ombra. */
+    display: flex;                             /* Layout flessivo. */
+    justify-content: space-between;            /* Spazia logo e link. */
+    align-items: center;                       /* Allinea al centro verticalmente. */
+    position: sticky;   /* rimane in alto */   /* Rimanere in alto durante lo scroll. */
+    top: 0;                                    /* Attacca in alto. */
+    z-index: 100;                              /* Sopra gli altri elementi. */
+}                                              /* Chiude navbar. */
+
+.nav-logo {                                    /* Logo. */
+    font-size: 22px;                           /* Dimensione. */
+    font-weight: bold;                         /* Grassetto. */
+    color: #333;                               /* Colore. */
+    letter-spacing: 0.5px;                     /* Spaziatura. */
+}                                              /* Chiude logo. */
+
+/* LINKS */                                    /* Sezione link. */
+.nav-links {                                   /* Lista link. */
+    list-style: none;                          /* Rimuove pallini. */
+    display: flex;                             /* Layout orizzontale. */
+    gap: 25px;                                 /* Spazio tra link. */
+}                                              /* Chiude lista. */
+
+.nav-links a {                                 /* Link. */
+    text-decoration: none;                     /* Rimuove sottolineatura. */
+    color: #0078ff;                            /* Colore azzurro. */
+    font-size: 16px;                           /* Dimensione. */
+    padding: 6px 10px;                         /* Spazio interno. */
+    border-radius: 6px;                        /* Angoli. */
+    transition: 0.25s ease;                    /* Transizione. */
+}                                              /* Chiude link. */
+
+.nav-links a:hover {                           /* Hover link. */
+    background: #e8f1ff;                       /* Sfondo chiaro. */
+    color: #005fcc;                            /* Colore scuro. */
+}                                              /* Chiude hover. */
+
+/*  MOBILE  */                                 /* Sezione mobile. */
+@media (max-width: 600px) {                    /* Schermi piccoli. */
+    .navbar {                                  /* Navbar mobile. */
+        flex-direction: column;                /* Colonna. */
+        gap: 10px;                             /* Spazio. */
+        padding: 20px;                         /* Padding. */
+    }                                          /* Chiude navbar mobile. */
+
+    .nav-links {                               /* Lista mobile. */
+        flex-direction: column;                /* Colonna. */
+        gap: 12px;                             /* Spazio. */
+        text-align: center;                    /* Centrato. */
+    }                                          /* Chiude lista mobile. */
+}                                              /* Chiude media query. */

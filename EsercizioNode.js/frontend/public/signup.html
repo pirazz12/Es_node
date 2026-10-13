@@ -1,0 +1,44 @@
+<!DOCTYPE html>                                <!-- HTML5. -->
+<html lang="it">                               <!-- Italiano. -->
+
+<head>                                         <!-- Head. -->
+    <meta charset="UTF-8">                     <!-- UTF-8. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive. -->
+    <title>Sign Up</title>                     <!-- Titolo. -->
+    <link rel="stylesheet" href="/css/signup.css"> <!-- CSS signup. -->
+    <link rel="stylesheet" href="/css/navbar.css"> <!-- CSS navbar. -->
+    <link rel="stylesheet" href="/css/footer.css"> <!-- CSS footer. -->
+</head>                                        <!-- Chiude head. -->
+
+<body>                                         <!-- Body. -->
+
+    <div id="navbar">                          <!-- Div navbar. -->
+        <script>                               //<!-- Caricamento navbar. -->
+            fetch('/components/navbar.html')   //<!-- Scarica navbar. -->
+                .then(response => response.text()) // Testo.
+                .then(html => document.getElementById('navbar').innerHTML = html); // Inserisce.
+        </script>                              <!-- Chiude script. -->
+    </div>                                     <!-- Chiude div. -->
+
+    <div class="signup-wrapper">               <!-- Wrapper per centrare. -->
+        <div class="signup-box">               <!-- Box form. -->
+            <h2>Sign Up</h2>                   <!-- Titolo form. -->
+            <form action="/signup" method="POST"> <!-- Form invio a /signup. -->
+                <input type="text" name="username" placeholder="Username" required> <!-- Username. -->
+                <input type="password" name="password" placeholder="Password" required> <!-- Password. -->
+                <button type="submit">Registrati</button> <!-- Pulsante. -->
+            </form>                            <!-- Chiude form. -->
+        </div>                                 <!-- Chiude box. -->
+    </div>                                     <!-- Chiude wrapper. -->
+
+    <div id="footer">                          <!-- Div footer. -->
+        <script>                               //<!-- Caricamento footer. -->
+            fetch('/components/footer.html')   //<!-- Scarica footer. -->
+                .then(response => response.text()) // Testo.
+                .then(html => document.getElementById('footer').innerHTML = html); // Inserisce.
+        </script>                              <!-- Chiude script. -->
+    </div>                                     <!-- Chiude div. -->
+
+</body>                                        <!-- Chiude body. -->
+
+</html>                                        <!-- Chiude HTML. -->
