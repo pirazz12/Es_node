@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Scheda FBI del giorno</title>
+    <title>FBI Wanted</title>
 
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
@@ -13,14 +12,16 @@
 </head>
 
 <body>
-    <!-- La barra di navigazione è condivisa con le altre pagine. -->
+
+    <!-- NAVBAR -->
     <div id="navbar"></div>
     <script>
         fetch("components/navbar.html")
-            .then(response => response.text())
+            .then(res => res.text())
             .then(html => document.getElementById("navbar").innerHTML = html);
     </script>
 
+    <!-- WEATHER CONTENT -->
     <main class="weather-wrapper fbi-wrapper">
         <section class="weather-box fbi-box">
             <h1>Scheda FBI del giorno</h1>
@@ -29,11 +30,11 @@
         </section>
     </main>
 
-    <!-- Anche il piè di pagina è condiviso con le altre pagine. -->
+    <!-- FOOTER -->
     <div id="footer"></div>
     <script>
         fetch("components/footer.html")
-            .then(response => response.text())
+            .then(res => res.text())
             .then(html => document.getElementById("footer").innerHTML = html);
     </script>
     <script src="js/fbi.js"></script>

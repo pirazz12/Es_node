@@ -23,7 +23,7 @@ def item_to_json(item):
 
 
 def safe_fbi_url(value):
-    # accettiamo solo link HTTPS del dominio FBI prima di inserirli nella risposta
+    # Accettiamo solo link HTTPS del dominio FBI prima di inserirli nella risposta
     if not isinstance(value, str):
         return ""
     parsed = urlparse(value)

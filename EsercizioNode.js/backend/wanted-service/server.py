@@ -15,8 +15,7 @@ PUBLIC_DIR = Path(__file__).resolve().parents[2] / "frontend" / "public"
 
 def get_daily_item():
     # User-Agent identifica il servizio; Accept dichiara che vogliamo dati JSON.
-    request = Request(
-        FBI_API_URL,
+    request = Request(FBI_API_URL,
         headers={
             "Accept": "application/json",
             "User-Agent": "FBI-Wanted-Daily-Service/1.0",
@@ -27,9 +26,9 @@ def get_daily_item():
         # timeout evita di lasciare la richiesta bloccata se l'API non risponde.
         with urlopen(request, timeout=10) as response:
             payload = json.load(response)
-    except (URLError, OSError, ValueError) as error:
-        raise RuntimeError("Impossibile contattare l'API FBI.") from error
-
+            print("payload: ", payload)
+    except Exception as error:
+        raise RuntimeError(f"Errore durante la richiesta all'API FBI: {error}") from error
     # API restituisce le schede nella proprietà "items".
     items = payload.get("items") if isinstance(payload, dict) else None
 
@@ -37,23 +36,23 @@ def get_daily_item():
         raise RuntimeError("La risposta dell'API FBI non contiene una lista valida.")
 
     valid_items = [item for item in items if isinstance(item, dict)]
+    print("valid_items: ", valid_items)
 
-    # persona ricercata e non catturata (more funny).
+    # Persona ricercata e non catturata (more funny).
     wanted_items = [
-        item
-        for item in valid_items
+        item for item in valid_items
         if str(item.get("poster_classification", "")).lower() == "wanted"
         and str(item.get("status", "")).lower() != "captured"
     ]
 
-    # se non ne troviamo, usiamo una scheda disponibile qualsiasi.
+    # Se non ne troviamo, usiamo una scheda disponibile qualsiasi.
     candidates = wanted_items or valid_items
 
     if not candidates:
         raise RuntimeError("L'API FBI non ha restituito schede disponibili.")
 
     # La data fa sì che tutti vedano la stessa scheda durante il giorno.
-    return candidates[(date.today().toordinal() - 1) % len(candidates)]
+    return candidates[(date.today().toordinal() - 1) % len(candidates)]    
 
 
 class WantedHandler(SimpleHTTPRequestHandler):
@@ -71,13 +70,13 @@ class WantedHandler(SimpleHTTPRequestHandler):
         self.wfile.write(encoded)
 
     def do_GET(self):
-        path = urlparse(self.path).path
+        path = urlparse(self.path).paths
         # La root del servizio mostra la pagina FBI.
         if path == "/":
             self.path = "/fbi.html"
 
         # questo endpoint restituisce i dati che fbi.js inserisce nella pagina.
-        if path == "/api/wanted/today":
+        if path == "/today":
             try:
                 person = item_to_json(get_daily_item())
             except RuntimeError as error:
@@ -90,7 +89,7 @@ class WantedHandler(SimpleHTTPRequestHandler):
             self.send_content(body, "application/json; charset=utf-8")
             return
 
-        # altre richieste (HTML, CSS, JavaScript) sono file statici del frontend.
+        # altre richieste (HTML, CSS, JavaScript) sono file statici del frontend.[cite: 5]
         super().do_GET()
 
 
