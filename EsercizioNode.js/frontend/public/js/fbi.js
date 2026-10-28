@@ -5,11 +5,14 @@ async function loadWantedPerson() {
     try {
         // Il backend chiama l'API FBI e restituisce solo i dati usati qui.
         const response = await fetch("/api/v1/wanted/today");
-        const person = await response.json();
 
+        // Verifichiamo prima se la risposta HTTP è valida (200 OK)
         if (!response.ok) {
-            throw new Error(person.error || "Servizio non disponibile");
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || `Servizio non disponibile (Errore ${response.status})`);
         }
+
+        const person = await response.json();
 
         // Usiamo textContent per mostrare i dati come testo, senza eseguire HTML.
         const title = document.createElement("h2");
