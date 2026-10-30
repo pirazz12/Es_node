@@ -59,5 +59,10 @@ async function loadWantedPerson() {
         result.textContent = error.message || "Non è stato possibile caricare la scheda FBI.";
     }
 }
+// Cerca questa riga:
+const response = await fetch("/api/v1/wanted/today");
+
+// Sostituiscila con questa:
+const response = await fetch("http://localhost:3002/api/v1/wanted/today");
 
 loadWantedPerson();
